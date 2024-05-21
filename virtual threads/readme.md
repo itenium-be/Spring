@@ -19,7 +19,7 @@ add spring-boot-starter-web as dependency and create the application
 
 configure the server port as follows in “application.properties”
 
-```
+```ini
 server.port=8081
 ```
 
@@ -27,7 +27,7 @@ server.port=8081
 
 Now, let’s create a new Java class named “BlockController” to set up blocking endpoints and run the program.
 
-```
+```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +56,7 @@ Generate and open the project using the same approach as in the first applicatio
 
 ### Configuring Application Properties
 
-```
+```ini
 server.port=8082
 ```
 
@@ -66,7 +66,7 @@ Create a Java class named “HomeController” to define endpoints. Subsequently
 
 Within this method, we utilize the RestClient in Spring Boot to make an HTTP call. This RestClient functions as a synchronous HTTP client, making it suitable for a multi-threaded program.
 
-```
+```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -105,7 +105,7 @@ In our machines, resources are limited, and we cannot allocate an unlimited amou
 
 We are adding another configuration to the “application.properties”.
 
-```
+```ini
 server.port=8082
 server.tomcat.threads.max=10
 ```
@@ -116,27 +116,27 @@ download [httpd-2.4.59-240404-win64-VS17.zip](https://www.apachelounge.com/downl
 unzip the folder    
 Move into the Apache24/bin directory and copy both the "ab" and "abs" executable files to your project directory
 
-```
+```sh
 ab -n 60 -c 20 http://localhost:8082/block/2
 ```
 
 You can see the following result in the IDE console for each reqeust.
 
-```
+```log
 2024-01-06T02:34:49.410+05:30  INFO 8888 --- [nio-8082-exec-2] be.itenium.thread.HomeController  : 200 OK on Thread[#38,http-nio-8082-exec-2,5,main]
 ```
 
 Look at the Time taken for tests.
 
 Let’s enable virtual threads and observe the performance gain from this existing feature in Spring Boot 3.2. To do that, go to the “application.properties ” file and make the following changes.
-```
+```ini
 server.port=8082
 spring.threads.virtual.enabled=true
 ```
 
 Run the same benchmark test as earlier. If your virtual threads are enabled successfully, you can see the log for each request in the IDE console as follows.
 
-```
+```log
 2024-01-06T02:39:34.204+05:30  INFO 22348 --- [omcat-handler-0] be.itenium.thread.HomeController  : 200 OK on VirtualThread[#40,tomcat-handler-0]/runnable@ForkJoinPool-1-worker-1
 ```
 

@@ -18,7 +18,7 @@ add spring-boot-starter-web,spring-boot-starter-data-mongodb,spring-boot-starter
 
 Adding a docker file to resources
 
-```
+```yaml
 version: '3.8'
 services:
   db:
@@ -34,7 +34,7 @@ volumes:
 ```
 ## adding spring properties for docker compose
 
-```
+```ini
 spring.docker.compose.enabled=true
 spring.docker.compose.file=docker-compose.yml
 ```
@@ -45,7 +45,7 @@ We don’t need a database configuration. The Docker Compose Support will create
 
 Here is an example of that config class with a profile:
 
-```
+```java
 /**
  * This profile is active for non docker-compose profile and will set up a MongoClient.
  * When docker-compose profile is active, the application will boot with application-docker-compose.yml and the Docker Compose support will start a default configuration
@@ -80,7 +80,7 @@ This way, we can choose whether to use the Docker Compose support. If we don’t
 
 ## create the model
 
-```
+```java
 @Document("item")
 @Data
 @NoArgsConstructor
@@ -99,7 +99,7 @@ public class Item {
 
 Lets just add CRUD operations
 
-```
+```java
 @RestController
 @RequestMapping("/item")
 @RequiredArgsConstructor
@@ -131,7 +131,7 @@ public class ItemController {
 
 ## Create the repository
 
-```
+```java
 import java.util.List;
 
 import be.itenium.docker.model.Item;
