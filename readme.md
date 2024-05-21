@@ -20,13 +20,13 @@ Checkout this project to start
 
 ### Create a greeting record
 
-```
+```java
 public record Greeting(String name) {}
 ```
 
-### Create a controler
+### Create a controller
 
-```
+```java
 import be.itenium.observability.model.Greeting;
 import be.itenium.observability.service.GreetingService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,7 +54,7 @@ public class GreetingController {
 
 here is where the magic happens with micrometer where tyou observe your methode greeting with Mono of reactor and you can tag the data it will produce
 
-```
+```java
 import be.itenium.observability.model.Greeting;
 import io.micrometer.observation.ObservationRegistry;
 import lombok.extern.slf4j.Slf4j;
@@ -91,7 +91,7 @@ public class GreetingService {
 }
 ```
 
-### Docker contailers
+### Docker containers
 
 1. grafana
 2. prometheus
